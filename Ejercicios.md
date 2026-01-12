@@ -32,6 +32,34 @@ A continuación, se presentan algunos ejercicios prácticos para trabajar con la
 3. Consulta todos los nodos y aristas.
 4. Elimina una arista y verifica el grafo resultante.
 
+## Ejercicio 6: Operaciones avanzadas con Listas
+1. Inserta 10 elementos en la tabla `Lista`.
+2. Encuentra y elimina todos los elementos cuyo valor contenga la letra "a".
+3. Ordena los elementos restantes alfabéticamente y consulta el resultado.
+
+## Ejercicio 7: Pila con múltiples operaciones
+1. Inserta 5 elementos en la tabla `Pila`.
+2. Realiza 3 operaciones `pop` consecutivas.
+3. Inserta 2 nuevos elementos en la pila.
+4. Consulta el estado final de la pila.
+
+## Ejercicio 8: Cola circular
+1. Inserta 6 elementos en la tabla `Cola`.
+2. Realiza 2 operaciones `dequeue`.
+3. Inserta 2 nuevos elementos en la cola.
+4. Consulta el estado final de la cola para verificar el comportamiento circular.
+
+## Ejercicio 9: Árbol Binario de búsqueda
+1. Inserta nodos en la tabla `ArbolBinario` para formar un árbol de búsqueda binario.
+2. Consulta los nodos en orden ascendente (in-order traversal).
+3. Elimina un nodo con dos hijos y verifica el árbol resultante.
+
+## Ejercicio 10: Grafo dirigido con pesos
+1. Modifica la tabla `Arista` para incluir un peso en cada arista.
+2. Inserta aristas con pesos entre los nodos existentes.
+3. Encuentra el camino más corto entre dos nodos utilizando los pesos.
+4. Consulta el grafo resultante con los pesos de las aristas.
+
 ---
 
 ¡Practica estos ejercicios para reforzar tu comprensión de las estructuras de datos en SQL!
