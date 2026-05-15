@@ -73,6 +73,12 @@ psql -d estructuras_sql -f sql/grafo.sql
 
 También puedes abrir cada archivo en tu cliente SQL y ejecutarlo manualmente.
 
+Verificacion automatica (todo en uno):
+
+```bash
+psql -d estructuras_sql -f verificacion.sql
+```
+
 ## Qué incluye cada script
 
 1. Lista
