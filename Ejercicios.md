@@ -2,6 +2,11 @@
 
 A continuación, se presentan algunos ejercicios prácticos para trabajar con las estructuras de datos implementadas en SQL. Cada ejercicio incluye una descripción y los pasos a seguir.
 
+Nota:
+
+- Los ejercicios 1 al 7 se pueden resolver con los scripts actuales.
+- Los ejercicios 8 al 10 están pensados como extensión del modelo y pueden requerir cambios de esquema o consultas más avanzadas.
+
 ## Ejercicio 1: Operaciones con Listas
 1. Inserta 5 elementos en la tabla `Lista`.
 2. Consulta todos los elementos de la lista.
@@ -47,18 +52,21 @@ A continuación, se presentan algunos ejercicios prácticos para trabajar con la
 1. Inserta 6 elementos en la tabla `Cola`.
 2. Realiza 2 operaciones `dequeue`.
 3. Inserta 2 nuevos elementos en la cola.
-4. Consulta el estado final de la cola para verificar el comportamiento circular.
+4. Consulta el estado final de la cola para verificar la rotación lógica de elementos.
+5. Opcional avanzado: implementa una cola circular real agregando capacidad fija e índices de frente y fin.
 
 ## Ejercicio 9: Árbol Binario de búsqueda
 1. Inserta nodos en la tabla `ArbolBinario` para formar un árbol de búsqueda binario.
 2. Consulta los nodos en orden ascendente (in-order traversal).
 3. Elimina un nodo con dos hijos y verifica el árbol resultante.
+4. Opcional avanzado: agrega una clave numérica para validar formalmente la propiedad de árbol binario de búsqueda.
 
 ## Ejercicio 10: Grafo dirigido con pesos
 1. Modifica la tabla `Arista` para incluir un peso en cada arista.
 2. Inserta aristas con pesos entre los nodos existentes.
 3. Encuentra el camino más corto entre dos nodos utilizando los pesos.
 4. Consulta el grafo resultante con los pesos de las aristas.
+5. Opcional avanzado: intenta resolver la ruta mínima con CTE recursivo o procedimiento almacenado.
 
 ---
 
