@@ -83,22 +83,25 @@ También puedes abrir cada archivo en tu cliente SQL y ejecutarlo manualmente.
 2. Pila
 - Crea tabla Pila con fecha de ingreso.
 - Simula push con INSERT.
-- Simula top con ORDER BY descendente y LIMIT 1.
+- Simula top con ORDER BY id descendente y LIMIT 1.
 - Incluye ejemplo de pop comentado.
 
 3. Cola
 - Crea tabla Cola con fecha de ingreso.
 - Simula enqueue con INSERT.
-- Simula front con ORDER BY ascendente y LIMIT 1.
+- Simula front con ORDER BY id ascendente y LIMIT 1.
 - Incluye ejemplo de dequeue comentado.
 
 4. Árbol binario
 - Crea tabla ArbolBinario con autorreferencia (id_padre).
+- Incluye validación para limitar a máximo 2 hijos por nodo.
+- Incluye validación para evitar ciclos al actualizar relaciones padre-hijo.
 - Inserta raíz e hijos.
 - Consulta nodos del árbol.
 
 5. Grafo
 - Crea tablas Nodo y Arista.
+- Incluye restricciones para evitar aristas duplicadas y bucles simples.
 - Inserta nodos y aristas de ejemplo.
 - Consulta nodos y conexiones.
 
@@ -107,6 +110,7 @@ También puedes abrir cada archivo en tu cliente SQL y ejecutarlo manualmente.
 - Ejecuta primero en una base de datos de pruebas.
 - Si repites scripts, elimina tablas previas o agrega DROP TABLE IF EXISTS antes de CREATE TABLE.
 - Trabaja junto con [Ejercicios.md](Ejercicios.md) para reforzar conceptos.
+- Considera los ejercicios 8, 9 y 10 como retos de extensión del modelo base.
 
 ## Posibles mejoras
 
