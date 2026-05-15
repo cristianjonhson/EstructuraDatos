@@ -1,7 +1,7 @@
 -- Script unico de verificacion automatica (PostgreSQL + psql)
--- Ejecuta todos los scripts y valida casos clave de pila, cola, arbol y grafo.
+-- Ejecuta todos los scripts y valida casos clave.
 \
-set ON_ERROR_STOP on \ echo '== Ejecutando scripts base ==' \ i sql / lista.sql \ i sql / pila.sql \ i sql / cola.sql \ i sql / arbol.sql \ i sql / grafo.sql \ echo '== Iniciando validaciones ==' -- Validacion de pila: top debe ser el ultimo insertado (LIFO)
+set ON_ERROR_STOP on \ echo '== Ejecutando scripts base ==' \ i sql / lista.sql \ i sql / pila.sql \ i sql / cola.sql \ i sql / arbol.sql \ i sql / grafo.sql \ i sql / bst.sql \ echo '== Iniciando validaciones ==' -- Validacion de pila: top debe ser el ultimo insertado (LIFO)
     DO $$
 DECLARE top_valor TEXT;
 BEGIN
@@ -86,6 +86,80 @@ EXCEPTION
 WHEN OTHERS THEN bloqueo_bucle := TRUE;
 END;
 IF NOT bloqueo_bucle THEN RAISE EXCEPTION 'Grafo invalido: no se bloqueo un bucle (origen=destino).';
+END IF;
+END;
+$$;
+-- Validaciones de BST: orden, lado unico e in-order ascendente
+DO $$
+DECLARE cantidad_nodos INTEGER;
+bloqueo_orden BOOLEAN := FALSE;
+bloqueo_lado_duplicado BOOLEAN := FALSE;
+bloqueo_ciclo BOOLEAN := FALSE;
+desorden_count INTEGER;
+BEGIN
+SELECT COUNT(*) INTO cantidad_nodos
+FROM ArbolBST;
+IF cantidad_nodos <> 6 THEN RAISE EXCEPTION 'BST invalido: se esperaban 6 nodos tras el script base (incluye eliminacion de hoja), actual=%',
+cantidad_nodos;
+END IF;
+BEGIN
+INSERT INTO ArbolBST (valor_clave, id_padre, lado)
+VALUES (
+        11,
+        (
+            SELECT id
+            FROM ArbolBST
+            WHERE valor_clave = 10
+        ),
+        'L'
+    );
+EXCEPTION
+WHEN OTHERS THEN bloqueo_orden := TRUE;
+END;
+IF NOT bloqueo_orden THEN RAISE EXCEPTION 'BST invalido: no se bloqueo una insercion que rompe el orden.';
+END IF;
+BEGIN
+INSERT INTO ArbolBST (valor_clave, id_padre, lado)
+VALUES (
+        13,
+        (
+            SELECT id
+            FROM ArbolBST
+            WHERE valor_clave = 15
+        ),
+        'L'
+    );
+EXCEPTION
+WHEN OTHERS THEN bloqueo_lado_duplicado := TRUE;
+END;
+IF NOT bloqueo_lado_duplicado THEN RAISE EXCEPTION 'BST invalido: no se bloqueo ocupar un lado ya existente en un padre.';
+END IF;
+BEGIN
+UPDATE ArbolBST
+SET id_padre = (
+        SELECT id
+        FROM ArbolBST
+        WHERE valor_clave = 12
+    ),
+    lado = 'L'
+WHERE valor_clave = 10;
+EXCEPTION
+WHEN OTHERS THEN bloqueo_ciclo := TRUE;
+END;
+IF NOT bloqueo_ciclo THEN RAISE EXCEPTION 'BST invalido: no se bloqueo la creacion de ciclo.';
+END IF;
+WITH ordenados AS (
+    SELECT valor_clave,
+        LAG(valor_clave) OVER (
+            ORDER BY valor_clave
+        ) AS previo
+    FROM ArbolBST
+)
+SELECT COUNT(*) INTO desorden_count
+FROM ordenados
+WHERE previo IS NOT NULL
+    AND valor_clave <= previo;
+IF desorden_count <> 0 THEN RAISE EXCEPTION 'BST invalido: recorrido in-order no esta estrictamente ascendente.';
 END IF;
 END;
 $$;
